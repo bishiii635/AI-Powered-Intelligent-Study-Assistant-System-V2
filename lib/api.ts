@@ -43,6 +43,7 @@ export interface AuthUser {
     full_name: string;
     email: string;
     profile_picture: string | null;
+    role?: "student" | "admin";
     created_at: string;
     last_login_date: string | null;
 }

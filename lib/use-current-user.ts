@@ -46,6 +46,7 @@ export function useCurrentUser() {
         session,
         status,
         profile,
+        isAdmin: !!(profile && profile.role === "admin"),
         displayName,
         displayEmail,
         avatarUrl,

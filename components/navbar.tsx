@@ -18,10 +18,12 @@ import { Button } from "@/components/ui/button";
 import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { useCurrentUser } from "@/lib/use-current-user";
+import Link from "next/link";
 
 export function Navbar() {
     const pathname = usePathname();
-    const { displayName, displayEmail, avatarUrl, initials } = useCurrentUser();
+    const { displayName, displayEmail, avatarUrl, initials, profile } = useCurrentUser();
+    const isAdmin = !!(profile && profile.role === "admin");
 
     return (
         <header className="sticky top-0 z-30 flex h-16 w-full items-center border-b bg-background/60 backdrop-blur-xl px-4 md:px-8">
@@ -77,6 +79,14 @@ export function Navbar() {
                                 <User className="mr-2 h-4 w-4" />
                                 <span>Profile</span>
                             </DropdownMenuItem>
+                            {isAdmin && (
+                                <DropdownMenuItem asChild>
+                                    <Link href="/admin" className="cursor-pointer">
+                                        <Settings className="mr-2 h-4 w-4" />
+                                        <span>Admin Panel</span>
+                                    </Link>
+                                </DropdownMenuItem>
+                            )}
                             <DropdownMenuItem className="cursor-pointer text-indigo-600 dark:text-indigo-400">
                                 <Sparkles className="mr-2 h-4 w-4" />
                                 <span>Study Plan</span>
