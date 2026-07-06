@@ -17,6 +17,7 @@ import {
     GraduationCap,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useCurrentUser } from "@/lib/use-current-user";
 
 const sidebarItems = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -30,8 +31,14 @@ const sidebarItems = [
     { name: "Settings", href: "/settings", icon: Settings },
 ];
 
+const adminItem = { name: "Admin", href: "/admin", icon: LayoutDashboard };
+
 export function Sidebar() {
     const pathname = usePathname();
+
+    // show admin link only when profile indicates admin role or when env toggle enabled
+    const { profile } = useCurrentUser();
+    const isAdmin = !!(profile && (profile.role === "admin" || process.env.NEXT_PUBLIC_SHOW_ADMIN === "true"));
 
     return (
         <aside className="fixed left-0 top-0 z-40 h-screen w-72 border-r bg-card/50 backdrop-blur-xl hidden lg:block">
@@ -78,6 +85,24 @@ export function Sidebar() {
                             </Link>
                         );
                     })}
+                        {isAdmin && (
+                            <Link
+                                key={adminItem.name}
+                                href={adminItem.href}
+                                className={cn(
+                                    "group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200",
+                                    pathname === adminItem.href
+                                        ? "text-primary bg-primary/10"
+                                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                                )}
+                            >
+                                {pathname === adminItem.href && (
+                                    <div className="absolute inset-0 rounded-xl bg-primary/10 border border-primary/20" />
+                                )}
+                                <adminItem.icon className={cn("h-5 w-5 transition-colors", pathname === adminItem.href ? "text-primary" : "text-muted-foreground group-hover:text-foreground")} />
+                                <span className="relative z-10">{adminItem.name}</span>
+                            </Link>
+                        )}
                 </nav>
 
                 {/* Upgrade Card / Footer */}

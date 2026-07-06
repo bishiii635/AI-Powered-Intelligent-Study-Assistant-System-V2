@@ -32,7 +32,6 @@ This project contains a production-ready Student Authentication Module built wit
 │   └── auth.ts                       # Auth.js configuration
 ├── styles/
 │   └── globals.css                   # Global styles
-├── database_schema.sql               # PostgreSQL schema
 ├── next.config.mjs
 ├── tailwind.config.js
 └── tsconfig.json
@@ -78,7 +77,7 @@ TURNSTILE_SECRET_KEY=your_secret_key
     ```
 
 2.  **Initialize Database**:
-    Run the SQL script `database_schema.sql` on your Supabase SQL Editor.
+    Initialize your PostgreSQL database using your preferred migration tool or the Supabase SQL editor. The repository no longer includes a SQL schema file; apply your own schema or migrations.
 
 3.  **Run Development Server**:
     ```bash

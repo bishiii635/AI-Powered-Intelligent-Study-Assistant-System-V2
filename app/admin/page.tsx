@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import AdminLayout from "@/components/admin/AdminLayout";
 import {
     Users,
     Files,
@@ -61,10 +62,29 @@ const mockLogs = [
 
 export default function AdminDashboard() {
     const [activeTab, setActiveTab] = useState("overview");
-    const { displayName } = useCurrentUser();
+    const { displayName, profile, status } = useCurrentUser();
+
+    if (status === "loading") {
+        return <div className="py-20 text-center text-muted-foreground">Loading admin console...</div>;
+    }
+
+    if (!profile || profile.role !== "admin") {
+        return (
+            <div className="py-20 flex items-center justify-center">
+                <div className="max-w-xl text-center bg-card/40 p-8 rounded-2xl border border-white/5">
+                    <h2 className="text-2xl font-bold">Access denied</h2>
+                    <p className="text-sm text-muted-foreground mt-2">You do not have permission to view the admin control center.</p>
+                    <div className="mt-6">
+                        <a href="/" className="text-indigo-600 font-bold">Return to dashboard</a>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
-        <div className="space-y-8 pb-12 animate-fade-in max-w-[1600px] mx-auto">
+        <AdminLayout>
+            <div className="space-y-8 pb-12 animate-fade-in max-w-[1200px] mx-auto">
             {/* Admin Header */}
             <section className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-white/5 pb-8">
                 <div className="flex items-center gap-4">
@@ -279,6 +299,7 @@ export default function AdminDashboard() {
                 )}
 
             </AnimatePresence>
-        </div>
+            </div>
+        </AdminLayout>
     );
 }
