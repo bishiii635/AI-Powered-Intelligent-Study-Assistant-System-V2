@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -63,6 +64,7 @@
   .glass-dark {
     @apply bg-black/20 backdrop-blur-md border border-white/10;
   }
+  
   .gradient-text {
     @apply bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent;
   }
@@ -72,6 +74,7 @@
   .card-hover {
     @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
   }
+  
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
