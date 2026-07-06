@@ -85,17 +85,4 @@ TURNSTILE_SECRET_KEY=your_secret_key
     npm run dev
     ```
 
-## Features
 
-- ✅ Student Registration (bcrypt, Turnstile, Zod validation).
-- ✅ Student Login (Email/Password & Google OAuth).
-- ✅ Password Management (Forgot/Reset/Change password).
-- ✅ Profile Dashboard (Edit profile, view account info).
-- ✅ Responsive UI with Dark/Light mode (Ant Design).
-
-## Security Notes
-
-- All passwords are hashed using `bcrypt` before storage.
-- Session management is handled by Auth.js using the JWT strategy.
-- Public endpoints protected by Cloudflare Turnstile.
-- Input validation strictly enforced using Zod schemas.
